@@ -142,7 +142,12 @@ X = df.drop(columns=["G3"])
 y = df["G3"]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-model = RandomForestRegressor(random_state=42)
+model = RandomForestRegressor(
+    max_depth=15,
+    min_samples_split=5,
+    n_estimators=300,
+    random_state=42
+)
 model.fit(X_train, y_train)
 predictions = model.predict(X_test)
 mae = mean_absolute_error(y_test, predictions)
